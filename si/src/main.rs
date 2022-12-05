@@ -585,7 +585,7 @@ fn main() {
         _ => panic!("")
     };
 
-    fecha = fecha + ", " + &date.year().to_string();
+    fecha = fecha + &date.year().to_string();
     println!("Fecha: {}", fecha);
 
     loop {
