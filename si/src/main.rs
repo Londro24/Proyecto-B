@@ -191,6 +191,7 @@ fn fin_venta(suma: u32) {
     println!("Pago: ${}", monto_u32);
     println!("Vuelto: ${}", vuelto);
     println!("------------------------------");
+    println!("(ENTER para continuar)");
 }
 
 
