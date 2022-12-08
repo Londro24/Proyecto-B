@@ -26,6 +26,7 @@ fn is_entero_positivo(numero: &str) -> bool {
             return false
         }
     }
+    
     return true
 }
 
@@ -40,6 +41,7 @@ fn is_entero(numero: &str) -> bool {
             return false
         }
     }
+    
     return true
 }
 
@@ -48,10 +50,12 @@ fn open_file_to_write(path: &Path) -> File{
     open_file(path);
     let mut binding = OpenOptions::new();
     let binding = binding.write(true);
+    
     let file: File = match binding.open(path){
         Err(_why) => panic!("No se puede abrir el archivo"),
         Ok(file) => file,
     };
+    
     return file
 }
 
@@ -60,11 +64,12 @@ fn open_file_to_append(path: &Path) -> File{
     open_file(path);
     let mut binding = OpenOptions::new();
     let binding = binding.append(true);
+    
     let file: File = match binding.open(path){
         Err(_why) => panic!("No se puede abrir el archivo"),
         Ok(file) => file,
     };
-
+    
     return file
 }
 
@@ -80,7 +85,7 @@ fn create_blank_file(path: &Path){
     let _file: File = File::create(path).expect("El archivo no pudo crearse");
     let finanzas: &Path = Path::new("finanzas.csv");
     let inventario: &Path = Path::new("inventario.csv");
-
+    
     if path == finanzas {
         let mut file_finanzas = open_file_to_append(path);
         file_finanzas.write_all(b"Fecha,Costos,Ingresos\n").unwrap();
@@ -96,16 +101,18 @@ fn create_blank_file(path: &Path){
 
 fn open_file(path: &Path) -> String{
     let mut text: String = "".to_string();
-
+    
     if Path::new(path).exists(){
         let file: File = match File::open(&path){
             Err(_why) => panic!("El archivo no se puede abrir..."),
             Ok(file) => file,
         };
+        
         text = read_file(&file);
     } else {
         create_blank_file(path);
     }
+    
     return text
 }
 
@@ -195,7 +202,6 @@ fn fin_venta(suma: u32) {
     }
     
     let vuelto: u32 = monto_u32 - suma;
-    
     println!("------------------------------");
     println!("Monto: ${}", suma);
     println!("Pago: ${}", monto_u32);
