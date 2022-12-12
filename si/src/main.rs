@@ -629,9 +629,11 @@ fn ver_finanzas(path: &Path) {
     for a in texto.split("\n") {
         let mut contador = 0;
         let mut finanza: Finanza = Default::default();
+
         if a.trim() == "" {
             break
         }
+
         if primera_linea {
             for b in a.split(",") {
                 match contador {
@@ -639,12 +641,14 @@ fn ver_finanzas(path: &Path) {
                     1 => finanza.costo = b.trim().parse().unwrap(),
                     _ => finanza.ventas = b.trim().parse().unwrap()
                 }
+
                 contador += 1;
             }
         } else {
             primera_linea = true;
             continue;
         }
+        
         let balance: i32 =  finanza.ventas as i32 - finanza.costo as i32;
         println!("\n\x1b[1;33m{}:", finanza.fecha);
         println!("Costos:${}    Ingresos:${}", finanza.costo, finanza.ventas);
