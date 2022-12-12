@@ -1,4 +1,3 @@
-use std::default;
 use std::io::stdin;
 use std::fs::File;
 use std::path::Path;
@@ -7,7 +6,6 @@ use std::fs::OpenOptions;
 use std::io::Write;
 use chrono::prelude::*;
 use std::io::BufWriter;
-
 
 
 #[derive(Default)]
@@ -65,7 +63,7 @@ fn borrar_file(path: &Path) -> std::io::Result<()> {
 
 fn open_file_to_write(path: &Path) -> File {
     open_file(path);
-    borrar_file(path);
+    borrar_file(path).expect("uwu") ;
     let file: File = open_file_to_append(path);
 
     return file;
@@ -226,7 +224,7 @@ fn vender(finanzas: &Path, inventario: &Path, fecha: &str) {
     let mut error: bool = false;
     
     loop {
-        println!("\x1b[1;33mTotal: ${}\x1b[0m", suma);
+        println!("\x1b[1;33mTotal: ${}\x1b[0m        \x1b[1;34m(0) Para terminar la venta\x1b[0m", suma);
         println!("------------------------------");
         let mut entrada: String = String::new();
         stdin().read_line(&mut entrada).unwrap();
@@ -248,7 +246,7 @@ fn vender(finanzas: &Path, inventario: &Path, fecha: &str) {
         
         if producto.codigo == "".to_string() {
             loop {
-                println!("\x1b[1;31mProducto no válido presiones 1 para continuar\x1b[0m");
+                println!("\x1b[1;31mProducto no válido presiones (1) para continuar\x1b[0m");
                 let mut entrada2: String = String::new();
                 stdin().read_line(&mut entrada2).unwrap();
                 
@@ -381,7 +379,7 @@ fn ingresar(finanzas: &Path, inventario: &Path, fecha: &str) {
         let producto: Producto = cambiar_stock(inventario, &codigo, num_cantidad);
         
         if producto.codigo == "".to_string() {
-            println!("\x1b[1;31mProducto no existe en el invetario, presione 1 para continuar\x1b[0m");
+            println!("\x1b[1;31mProducto no existe en el invetarioACS0001ACS\x1b[0m");
             continue;
         }
         
@@ -506,7 +504,17 @@ fn editar(inventario: &Path) {
                     }
                 }
             } else {
-                stdin().read_line(&mut entrada).unwrap();
+                loop{
+                    stdin().read_line(&mut entrada).unwrap();
+                    if entrada.contains(",") {
+                        println!("\n\x1b[1;31mEl nombre no puede tener comas (,)\x1b[0m\n");
+                        println!("\x1b[1;34mNombre:\x1b[0m");
+                        entrada = "".to_string();
+                        continue
+                    }
+                    break
+                }
+                
             }
             
             match a {
@@ -536,6 +544,11 @@ fn agregar_nuevo(finanzas: &Path, inventario: &Path, fecha: &str) {
         
         if codigo.trim() == "0" {
             break
+        }
+
+        if codigo.trim().contains(",") {
+            println!("\n\x1b[1;31mEl código no puede tener comas (,)\x1b[0m\n");
+            continue
         }
         
         for a in text_inventario.split("\n") {
@@ -635,8 +648,8 @@ fn ver_finanzas(path: &Path) {
         }
         let balance: i32 =  finanza.ventas as i32 - finanza.costo as i32;
         println!("\n\x1b[1;33m{}:", finanza.fecha);
-        println!("Costos:{}    Ingresos:{}\n", finanza.costo, finanza.ventas);
-        println!("Balance: {}\x1b[0m\n", balance)
+        println!("Costos:${}    Ingresos:${}", finanza.costo, finanza.ventas);
+        println!("Balance:${}\x1b[0m\n", balance)
     }
 
 }
@@ -683,7 +696,7 @@ fn main() {
     
     let mut fecha: String = match date.month() {
         1 => "Enero".to_string(),
-        2 => "febrero".to_string(),
+        2 => "Febrero".to_string(),
         3 => "Marzo".to_string(),
         4 => "Abril".to_string(),
         5 => "Mayo".to_string(),
