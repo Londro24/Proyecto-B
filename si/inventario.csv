@@ -1,9 +1,5 @@
 Codigo,Nombre,Costo,Venta,Stock
-1,Galleta uwu,120,1500,18
-2,Bebida Esprit,600,800,33
-3,atun,500,1000,16
-4,Manzana,150,300,37
-5,pasta de dientes,500,800,10
-6,aaaa,500,700,10
-G001,Galletas,600,750,8
-
+ACS0001ACS,Gálleta Hóreo,100,200,8
+ACS0010ACS,Catolate,750,1000,19
+ACS0002ACS,Aceite de maravilla Veoflor 1 litro,1000,1400,17
+ACS0011ACS,Galletas meckay 200g,150,250,27
