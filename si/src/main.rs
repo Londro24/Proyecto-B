@@ -650,7 +650,6 @@ fn ver_finanzas(path: &Path) {
         println!("Costos:${}    Ingresos:${}", finanza.costo, finanza.ventas);
         println!("Balance:${}\x1b[0m\n", balance)
     }
-
 }
 
 
