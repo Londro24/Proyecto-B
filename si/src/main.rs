@@ -544,7 +544,7 @@ fn agregar_nuevo(finanzas: &Path, inventario: &Path, fecha: &str) {
         if codigo.trim() == "0" {
             break
         }
-
+        
         if codigo.trim().contains(",") {
             println!("\n\x1b[1;31mEl código no puede tener comas (,)\x1b[0m\n");
             continue
@@ -579,7 +579,7 @@ fn agregar_nuevo(finanzas: &Path, inventario: &Path, fecha: &str) {
                 }
                 
                 stdin().read_line(&mut entrada).unwrap();
-
+                
                 if entrada.trim() == "" {
                     println!("\n\x1b[1;31mEl campo no puede estar vacío\x1b[0m\n");
                     continue;
@@ -599,11 +599,11 @@ fn agregar_nuevo(finanzas: &Path, inventario: &Path, fecha: &str) {
                     break
                 } else if is_entero(entrada.trim()) {
                     linea = linea + entrada.trim() + ",";
-
+                    
                     if a == 1 {
                         precio_unidad = entrada.trim().parse().unwrap();
                     }
-
+                    
                     break
                 } else {
                     println!("\x1b[1;31mNo es un número válido\x1b]0m");
@@ -611,12 +611,12 @@ fn agregar_nuevo(finanzas: &Path, inventario: &Path, fecha: &str) {
                 }
             }
         }
-
+        
         let costo: i32 = precio_unidad * cantidad;
         agregar_costos_inventario(fecha, costo, finanzas);
         file_inventario.write_all(linea.as_bytes()).unwrap();
         println!("\x1b[1;33mSe ingresó:\x1b[0m");
-
+        
         for a in linea.split(",") {
             println!("\x1b[1;33m{}\x1b[0m", a.trim());
         }
