@@ -63,7 +63,7 @@ fn borrar_file(path: &Path) -> std::io::Result<()> {
 
 fn open_file_to_write(path: &Path) -> File {
     open_file(path);
-    borrar_file(path).expect("uwu");
+    borrar_file(path).expect("");
     let file: File = open_file_to_append(path);    
     return file;
 }
