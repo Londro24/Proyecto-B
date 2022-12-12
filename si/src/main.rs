@@ -93,8 +93,8 @@ fn read_file(mut file: &File) -> String {
 
 fn create_blank_file(path: &Path){
     let _file: File = File::create(path).expect("El archivo no pudo crearse");
-    let finanzas: &Path = Path::new("finanzas.csv");
-    let inventario: &Path = Path::new("inventario.csv");
+    let finanzas: &Path = Path::new("Finanzas.csv");
+    let inventario: &Path = Path::new("Inventario.csv");
     
     if path == finanzas {
         let mut file_finanzas: File = open_file_to_append(path);
