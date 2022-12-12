@@ -1,5 +1,7 @@
 Codigo,Nombre,Costo,Venta,Stock
-ACS0001ACS,Gálleta Hóreo,100,200,8
-ACS0010ACS,Catolate,750,1000,19
-ACS0002ACS,Aceite de maravilla Veoflor 1 litro,1000,1400,17
-ACS0011ACS,Galletas meckay 200g,150,250,27
+ACS0001ACS,Galleta oreo,150,250,18
+ACS0010ACS,Catolate,750,1000,18
+ACS0002ACS,Aceite de maravilla Veoflor 1 litro,1000,1400,16
+ACS0011ACS,Galletas meckay 200g,150,250,26
+ACS0013ACS,pan,200,300,20
+1,uwu,9,9,18

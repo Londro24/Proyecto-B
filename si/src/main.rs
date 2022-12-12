@@ -362,26 +362,31 @@ fn ingresar(finanzas: &Path, inventario: &Path, fecha: &str) {
             println!("\x1b[1;31mEste campo no puede estar vacío\x1b[0m");
             continue;
         }
+        let producto: Producto = cambiar_stock(inventario, &codigo, 0);
+        
+        if producto.codigo == "".to_string() {
+            println!("\x1b[1;31mProducto no existe en el invetario\x1b[0m");
+            continue;
+        }
         
         loop{
             println!("\x1b[1;34mIngrese la cantidad\x1b[0m");
             stdin().read_line(&mut cantidad).unwrap();
-            
+            if cantidad.trim().len() > 8 {
+                cantidad = "".to_string();
+                println!("\x1b[1;31mNúmero excesivamente grande\x1b[0m");
+                continue
+            }
             if is_entero(&cantidad) {
                 break
             }
-            
+            println!("\x1b[1;31mCantidad no válida\x1b[0m");
             cantidad = "".to_string();
         }
         
         let num_cantidad: i32 = cantidad.trim().parse().unwrap();
         let producto: Producto = cambiar_stock(inventario, &codigo, num_cantidad);
-        
-        if producto.codigo == "".to_string() {
-            println!("\x1b[1;31mProducto no existe en el invetarioACS0001ACS\x1b[0m");
-            continue;
-        }
-        
+
         let precio_unidad: u32 = producto.costo;
         let costo: i32 =  precio_unidad as i32 * num_cantidad;
         
@@ -494,8 +499,11 @@ fn editar(inventario: &Path) {
             if a != 0{
                 loop {
                     stdin().read_line(&mut entrada).unwrap();
-                    
-                    if is_entero_positivo(entrada.trim()){
+                    if entrada.trim().len() > 8 {
+                        entrada = "".to_string();
+                        println!("\x1b[1;31mNúmero excesivamente grande\x1b[0m");
+                        continue
+                    } else if is_entero_positivo(entrada.trim()){
                         break
                     } else {
                         entrada = "".to_string();
@@ -582,6 +590,11 @@ fn agregar_nuevo(finanzas: &Path, inventario: &Path, fecha: &str) {
                 
                 if entrada.trim() == "" {
                     println!("\n\x1b[1;31mEl campo no puede estar vacío\x1b[0m\n");
+                    continue;
+                }
+
+                if a != 0 && entrada.trim().len() > 8{
+                    println!("\x1b[1;31mNúmero excesivamente grande\x1b[0m");
                     continue;
                 }
                 
